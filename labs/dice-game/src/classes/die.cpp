@@ -1,8 +1,8 @@
 #include "die.h"
 
-#include <ctime>
-#include <random>
+Die::Die() {
+  this->_distribution = uniform_int_distribution<int>(1, 6);
+  this->_generator = mt19937(random_device{}());
+}
 
-Die::Die() { srand(time(NULL)); }
-
-void Die::roll() { this->_faceValue = (rand() % 6) + 1; }
+void Die::roll() { this->_faceValue = _distribution(_generator) + 1; }
